@@ -60,6 +60,10 @@ public class StartPage extends Application {
 
 	private File fileName;
 
+	private static int showIndex = -1;
+
+	private HBox mcenter;
+
 	@Override
 	public void start(Stage stage) {
 
@@ -142,7 +146,10 @@ public class StartPage extends Application {
 		MenuItem testing = new MenuItem("Testing", "testing.png");
 		MenuItem results = new MenuItem("Results", "results.png");
 		MenuItem exit = new MenuItem("Exit", "exit.png");
-		VBox menu = new VBox(about.getGroup(), system.getGroup(), parametr.getGroup(), modeling.getGroup(), testing.getGroup(), results.getGroup(), exit.getGroup());
+		HBox addMenu = new HBox();
+		addMenu.setMaxSize(250, 100);
+		addMenu.setMinSize(250, 100);
+		VBox menu = new VBox(about.getGroup(), system.getGroup(), parametr.getGroup(), modeling.getGroup(), testing.getGroup(), results.getGroup(), exit.getGroup(), addMenu);
 		leftI.getChildren().add(menu);
 
 		leftE.getChildren().add(leftI);
@@ -157,7 +164,7 @@ public class StartPage extends Application {
 		HBox centerI = new HBox();
 		centerI.setMinSize(960, 520);
 		centerI.setStyle("-fx-padding: 10; -fx-opacity: 0.8; -fx-background-radius: 15; ");
-		HBox mcenter = new HBox();
+		mcenter = new HBox();
 		mcenter.setMinSize(950, 500);
 		mcenter.getStyleClass().add("center");
 		centerI.getChildren().add(mcenter);
@@ -193,6 +200,7 @@ public class StartPage extends Application {
 			public void handle(MouseEvent event) {
 				mcenter.getChildren().clear();
 				mcenter.getChildren().add(setAbout());
+				addMenu.getChildren().clear();
 			}
 
 		});
@@ -203,6 +211,7 @@ public class StartPage extends Application {
 			public void handle(MouseEvent event) {
 				mcenter.getChildren().clear();
 				mcenter.getChildren().add(setSystem());
+				addMenu.getChildren().clear();
 			}
 
 		});
@@ -211,9 +220,9 @@ public class StartPage extends Application {
 
 			@Override
 			public void handle(MouseEvent event) {
-
 				mcenter.getChildren().clear();
 				mcenter.getChildren().add(addMethodTab());
+				addMenu.getChildren().clear();
 			}
 
 		});
@@ -222,9 +231,9 @@ public class StartPage extends Application {
 
 			@Override
 			public void handle(MouseEvent event) {
-
 				mcenter.getChildren().clear();
 				mcenter.getChildren().add(addParametrTab());
+				addMenu.getChildren().clear();
 			}
 
 		});
@@ -233,9 +242,9 @@ public class StartPage extends Application {
 
 			@Override
 			public void handle(MouseEvent event) {
-
 				mcenter.getChildren().clear();
 				mcenter.getChildren().add(addTestingTab());
+				addMenu.getChildren().clear();
 			}
 
 		});
@@ -244,9 +253,12 @@ public class StartPage extends Application {
 
 			@Override
 			public void handle(MouseEvent event) {
-
 				mcenter.getChildren().clear();
-				mcenter.getChildren().add(addShowTab());
+				if (list.size() > 1)
+					showIndex = 0;
+				addShowTab();
+				addMenu.getChildren().clear();
+				addMenu.getChildren().add(aditionalMenu());
 			}
 
 		});
@@ -312,16 +324,13 @@ public class StartPage extends Application {
 		return methodPane;
 	}
 
-	public TabPane addShowTab() {
+	public TabPane aditionalMenu() {
 		TabPane showPane = new TabPane();
 		showPane.getStyleClass().add("Mpane");
-		showPane.setMinWidth(840);
-		showPane.setMinHeight(400);
+		showPane.setMaxSize(250, 100);
+		showPane.setMinSize(250, 100);
 		Tab graphic = new Tab("Chart");
 		graphic.setGraphic(new ImageView(new Image("file:src/org/worker/resources/show_chart.png", 40, 50, false, true, false)));
-		if (list.size() > 1) {
-			graphic.setContent(Graphic.createChart(list, "Chart"));
-		}
 
 		Tab table = new Tab("Table");
 		table.setGraphic(new ImageView(new Image("file:src/org/worker/resources/show_table.png", 40, 50, false, true, false)));
@@ -334,24 +343,46 @@ public class StartPage extends Application {
 
 		showPane.getSelectionModel().selectedItemProperty().addListener((obs, ov, nv) -> {
 			if (list.size() > 1) {
-				int n = showPane.getSelectionModel().getSelectedIndex();
-				switch (n) {
-				case 0:
-					graphic.setContent(Graphic.createChart(list, "Chart"));
-					break;
-				case 1:
-					table.setContent(Table.initTable(list));
-					break;
-				case 2:
-					table_graphic.setContent(GraphicTable.display(list, "Table+Graphic"));
-					break;
-				}
+				showIndex = showPane.getSelectionModel().getSelectedIndex();
+				switchMCenter();
 			}
 		});
-
-		HBox container = new HBox(showPane);
-		container.setMinWidth(850);
 		return showPane;
+	}
+
+	public void switchMCenter() {
+		if (showIndex > -1) {
+			switch (showIndex) {
+			case 0:
+				mcenter.getChildren().clear();
+				mcenter.getChildren().add(Graphic.createChart(list, "Chart"));
+				break;
+			case 1:
+				mcenter.getChildren().clear();
+				mcenter.getChildren().add(Table.initTable(list));
+				break;
+			case 2:
+				mcenter.getChildren().clear();
+				mcenter.getChildren().add(GraphicTable.display(list, "Table+Graphic"));
+				break;
+			}
+		}
+	}
+
+	public void addShowTab() {
+		if (showIndex > -1) {
+			switch (showIndex) {
+			case 0:
+				mcenter.getChildren().add(Graphic.createChart(list, "Chart"));
+				break;
+			case 1:
+				mcenter.getChildren().add(Table.initTable(list));
+				break;
+			case 2:
+				mcenter.getChildren().add(GraphicTable.display(list, "Table+Graphic"));
+				break;
+			}
+		}
 	}
 
 	public VBox setAbout() {
