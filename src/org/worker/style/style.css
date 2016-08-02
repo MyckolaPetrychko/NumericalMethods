@@ -1,0 +1,142 @@
+#pane{
+	-fx-background-image: url("file:src/org/worker/resources/bg.jpg");
+	-fx-background-repeat: stretch;
+	-fx-background-size: 1300 700;
+	-fx-background-position: center center;
+	-fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0); 
+}
+
+.button1{
+	-fx-background-color: #000;
+	-fx-text-fill: white;
+	-fx-font: bold 18px Tahoma;
+}
+
+.topButton{
+	-fx-background-color: transparent;
+}
+
+.topLayout{
+	-fx-opacity: 0.7;
+	-fx-padding: 10;
+}
+
+.topLayout:hover{
+	-fx-opacity: 1;
+	
+}
+
+.topButton:hover{
+	
+}
+
+.button1:pressed{
+	-fx-opacity:  0.5;
+}
+
+.button1:hover{
+	-fx-opacity: 0.6;
+}
+
+.button1:focused{
+	-fx-opacity: 0.8;
+}
+
+
+
+.textStyle{
+	-fx-padding: 15;
+	-fx-font: 30px Tahoma;
+	-fx-fill: #fff;
+}
+
+.text1{
+	-fx-font: bold 16px Tahoma;
+	-fx-fill: white;
+}
+
+#text1{
+	-fx-font: bold 16px Tahoma;
+	-fx-text-fill: white;
+}
+
+.center{
+	-fx-padding: 10;
+	-fx-background-color: #000; 
+}
+
+.tab-pane .tab-header-area .tab-header-background {
+	-fx-opacity: 0;
+} 
+
+.tab-pane{
+	 -fx-tab-min-height: 70;
+    -fx-tab-max-height: 70;
+    -fx-tab-min-width: 70;
+    -fx-tab-max-width: 70;
+}
+
+.tab{
+	     -fx-background-color: transparent;
+	   
+}
+
+.tab:hover{
+	-fx-cursor: hand;
+}
+
+.tab .tab-label {
+    -fx-content-display: bottom;
+-fx-font: bold 12px Tahoma;
+	-fx-text-fill: white;
+}
+
+.tab:selected  .tab-label{
+    -fx-content-display: bottom;
+-fx-font: bold 12px Tahoma;
+	-fx-text-fill: black;
+}
+
+.tab:selected 
+{
+/*    -fx-background-color: white;*/
+/*    -fx-background-color: -fx-tab-border-color, -fx-inner-border, -fx-body-color;
+-fx-background-radius: 5 5 0 0, 4 4 0 0, 3 3 0 0;
+-fx-background-insets: 0, 1 1 0 1, 2 2 0 2;*/
+-fx-background-color: white;
+-fx-background-insets: 0, 1 1 0 1;
+-fx-background-radius: 5 5 0 0, 4 4 0 0;
+}
+
+.tab:disabled:hover 
+{
+-fx-color: white;
+-fx-opacity: 0.8;
+}
+.tab:disabled 
+{
+-fx-opacity: 0.7;
+  
+}
+
+/* .tab-content-area 
+{
+-fx-background-color: -fx-control-inner-background;
+-fx-padding: 0.0em;  
+ -fx-opacity: -fx-disabled-opacity;
+}*/
+
+
+.axis-label{
+	-fx-text-fill: white;
+}
+
+.chart-title {
+  -fx-text-fill: white;
+  -fx-font-size: 1.6em;
+}
+
+ 
+.axis{
+	-fx-tick-label-fill: white;
+}

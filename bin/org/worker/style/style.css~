@@ -1,0 +1,44 @@
+#pane{
+	-fx-background-image: url("file:src/org/worker/resources/bg.jpg");
+	-fx-background-repeat: stretch;
+	-fx-background-size: 1200 600;
+	-fx-background-position: center center;
+	-fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0); 
+}
+
+.button1{
+	-fx-background-color: #000;
+	-fx-text-fill: white;
+	-fx-font: bold 18px Tahoma;
+}
+
+.button1:pressed{
+	-fx-background-color: #bfbfbf;
+}
+
+.button1:hover{
+	-fx-opacity: 0.8;
+}
+
+.button1:focused{
+	-fx-opacity: 0.6;
+}
+
+#left:hover{
+	-fx-opacity: 0.9;
+}
+
+.textStyle{
+	-fx-padding: 15;
+	-fx-font: 30px Tahoma;
+}
+
+.text1{
+	-fx-font: bold 16px Tahoma;
+	-fx-fill: white;
+}
+
+.center{
+	-fx-padding: 10;
+	-fx-background-color: #000; 
+}
